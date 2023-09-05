@@ -1,2 +1,2 @@
 #!/bin/bash
-echo Usage: $0 directory
+echo $PATH | tr ':'"\n" | wc -l
