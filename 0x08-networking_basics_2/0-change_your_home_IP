@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Backup original hosts file
+cp /etc/hosts /etc/hosts.bak
+
+# Modify hosts file
+sed -i 's/127.0.0.1 localhost/127.0.0.2 localhost/g' /etc/hosts
+echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts
+
+# Display success message
+echo "Host configuration updated successfully."
+
+# Check Docker environment
+if [[ -e /var/run/docker.sock ]]; then
+    # Restart Docker container to apply changes
+    sudo service docker restart
+    echo "Docker container restarted."
+fi
+
